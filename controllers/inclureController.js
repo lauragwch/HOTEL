@@ -48,6 +48,29 @@ async function servicesByRoomType(req, res) {
     }
 }
 
+async function countServicesByReservation(req, res) {
+    try {
+        const countServicesByReservation = await inclureService.countServicesByReservation(req.params.id_reservation);
+        res.status(200);
+        res.json(countServicesByReservation);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la récupération des services" });
+    }
+}
+
+async function servicesByReservationTotalPriceAbove(req, res) {
+    try {
+        const servicesByReservationTotalPriceAbove = await inclureService.servicesByReservationTotalPriceAbove(req.params.amount);
+        res.status(200);
+        res.json(servicesByReservationTotalPriceAbove);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la récupération des services" });
+    }
+}
 
 
 
@@ -62,5 +85,7 @@ module.exports = {
     servicesByReservation,
     totalPriceServicesByReservation,
     totalServicesByReservation,
-    servicesByRoomType
+    servicesByRoomType,
+    countServicesByReservation,
+    servicesByReservationTotalPriceAbove
 }

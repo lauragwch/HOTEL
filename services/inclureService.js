@@ -24,7 +24,17 @@ function servicesByRoomType(roomType) {
     });
 }
 
+function countServicesByReservation(id_reservation) {
+    return connection.promise().query('SELECT COUNT(*) FROM service_usage INNER JOIN services ON services.id_service = service_usage.id_service WHERE service_name = ?', [id_reservation]).then((results) => {
+        return results[0];
+    });
+}
 
+function servicesByReservationTotalPriceAbove(amount) {
+    return connection.promise().query('SELECT service_name FROM services INNER JOIN service_usage ON service_usage.id_service = services.id_service INNER JOIN reservations ON reservations.id_reservation = service_usage.id_reservation WHERE total_price > ?', [amount]).then((results) => {
+        return results[0];
+    });
+}
 
 
 
@@ -36,4 +46,6 @@ module.exports = {
     totalPriceServicesByReservation,
     totalServicesByReservation,
     servicesByRoomType,
+    countServicesByReservation,
+    servicesByReservationTotalPriceAbove
 }

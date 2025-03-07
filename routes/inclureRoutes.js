@@ -23,6 +23,16 @@ router.get('/servicesByRoomType/:roomType', (req, res) => {
     InclureController.servicesByRoomType(req, res);
 });
 
+// GET /inclure/countServicesByReservation/:id_reservation
+router.get('/countServicesByReservation/:id_reservation', (req, res) => {
+    InclureController.countServicesByReservation(req, res);
+});
+
+// GET /inclure/servicesByReservationTotalPriceAbove/:amount  PAS SURE DE CELLE CI
+router.get('/servicesByReservationTotalPriceAbove/:amount', (req, res) => {
+    InclureController.servicesByReservationTotalPriceAbove(req, res);
+});
+
 
 
 
