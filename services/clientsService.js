@@ -13,7 +13,7 @@ function oneClient(id){
 }
 
 function clientsByYear(year){
-    return connection.promise().query('SELECT * FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE YEAR(check_in_date) = ?', [year]).then((results) => {
+    return connection.promise().query('SELECT * FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE YEAR(checkin_date) = ?', [year]).then((results) => {
         return results[0];
     });
 }
