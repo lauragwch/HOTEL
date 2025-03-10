@@ -13,13 +13,13 @@ router.get('/:id', (req, res) => {
     PaymentsController.paymentById(req, res);
 });
 
-// GET /paymentsByMethod/:method
+// GET /payments/method/:method
 router.get('/method/:method', (req, res) => {
     PaymentsController.paymentsByMethod(req, res);
 });
 
-// GET /payments/totalByMonthandYear:month:year
-router.get('/totalByMonthYear/:month', (req, res) => {
+// GET /payments/totalByMonthYear:month:year
+router.get('/totalByMonthYear/:month/:year', (req, res) => {
     PaymentsController.totalByMonthAndYear(req, res);
 });
 

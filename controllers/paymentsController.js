@@ -38,7 +38,7 @@ async function paymentsByMethod(req, res) {
 
 async function totalByMonthAndYear(req, res) {
     try {
-        const totalByMonthAndYear = await paymentsService.totalByMonthAndYear(req.params.month);
+        const totalByMonthAndYear = await paymentsService.totalByMonthAndYear(req.params.month, req.params.year);
         res.status(200);
         res.json(totalByMonthAndYear);
     } catch (error) {

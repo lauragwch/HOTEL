@@ -13,13 +13,14 @@ function paymentById(id){
 }
 
 function paymentsByMethod(method){
-    return connection.promise().query('SELECT * FROM payments WHERE payment_method = ?', [method]).then((results) => {
+    return connection.promise().query('SELECT * FROM payments WHERE payment_method LIKE  ?', [method]).then((results) => {
         return results[0];
     });
 }
 
 function totalByMonthAndYear(month, year){
-    return connection.promise().query('SELECT SUM(amount) FROM payments WHERE MONTH(payment_date) = ? AND YEAR(payment_date) = ?; ', [month, year]).then((results) => {
+    console.log(month, year);
+    return connection.promise().query('SELECT SUM(amount) AS "Montant total" FROM payments WHERE MONTH(payment_date) = ? AND YEAR(payment_date) = ? ', [month, year]).then((results) => {
         return results[0];
     });
 }
