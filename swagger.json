@@ -1407,12 +1407,7 @@
                 }
             }
         },
-
-
-
-
         "_comment": "PAYMENTS",
-
         "/payments": {
             "get": {
                 "operationId": "allPayments",
@@ -1455,7 +1450,6 @@
                 }
             }
         },
-
         "/payments/{id}": {
             "get": {
                 "operationId": "payment_id",
@@ -1502,8 +1496,7 @@
                 }
             }
         },
-
-        "/payments/method/{method}": { 
+        "/payments/method/{method}": {
             "get": {
                 "operationId": "payment_method",
                 "tags": [
@@ -1549,8 +1542,6 @@
                 }
             }
         },
-
-
         "/payments/totalByMonthYear/{month}/{year}": {
             "get": {
                 "operationId": "payment_total",
@@ -1566,7 +1557,6 @@
                         "type": "integer"
                     },
                     {
-                    
                         "name": "year",
                         "in": "path",
                         "required": true,
@@ -1595,8 +1585,7 @@
                 }
             }
         },
-
-        "/payments/above/{amount}": { 
+        "/payments/above/{amount}": {
             "get": {
                 "operationId": "payment_above",
                 "tags": [
@@ -1641,10 +1630,759 @@
                     }
                 }
             }
+        },
+        "/payments/reservationStatus/{status}": {
+            "get": {
+                "operationId": "payment_status",
+                "tags": [
+                    "Payments"
+                ],
+                "description": "Recupere un paiement par le statut de la reservation",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_payment": {
+                                    "type": "integer"
+                                },
+                                "payment_date": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "payment_method": {
+                                    "type": "string"
+                                },
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_client": {
+                                    "type": "integer"
+                                },
+                                "id_room": {
+                                    "type": "integer"
+                                },
+                                "checkin_date": {
+                                    "type": "string"
+                                },
+                                "checkout_date": {
+                                    "type": "string"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "reservation_status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/payments/totalByReservationStatus/{status}": {
+            "get": {
+                "operationId": "totalAmountByStatus",
+                "tags": [
+                    "Payments"
+                ],
+                "description": "Recupere le cout total des reservations par statut de reservation",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_payment": {
+                                    "type": "integer"
+                                },
+                                "payment_date": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "payment_method": {
+                                    "type": "string"
+                                },
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_client": {
+                                    "type": "integer"
+                                },
+                                "id_room": {
+                                    "type": "integer"
+                                },
+                                "checkin_date": {
+                                    "type": "string"
+                                },
+                                "checkout_date": {
+                                    "type": "string"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "reservation_status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/payments/countByMethod/{method}": {
+            "get": {
+                "operationId": "countByMethod",
+                "tags": [
+                    "Payments"
+                ],
+                "description": "Recupere le nombre de reservations par methode de paiement",
+                "parameters": [
+                    {
+                        "name": "method",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_payment": {
+                                    "type": "integer"
+                                },
+                                "payment_date": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "payment_method": {
+                                    "type": "string"
+                                },
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_client": {
+                                    "type": "integer"
+                                },
+                                "id_room": {
+                                    "type": "integer"
+                                },
+                                "checkin_date": {
+                                    "type": "string"
+                                },
+                                "checkout_date": {
+                                    "type": "string"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "reservation_status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "_comment": "SERVICES",
+        "/services": {
+            "get": {
+                "operationId": "allServices",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Recupere la liste de tous les services",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not found"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        },
+        "/services/{id}": {
+            "get": {
+                "operationId": "service_id",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Recupere un service par son id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_service": {
+                                    "type": "integer"
+                                },
+                                "service_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/above/{amount}": {
+            "get": {
+                "operationId": "serviceAmountAbove",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Recupere un service au dessus d'un montant donne",
+                "parameters": [
+                    {
+                        "name": "amount",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_service": {
+                                    "type": "integer"
+                                },
+                                "service_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/mostpopular": {
+            "get": {
+                "operationId": "ServicesMostPopular",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Recupere les services les plus populaires",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not found"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        },
+        "/services/totalCostServices/{roomType}": {
+            "get": {
+                "operationId": "serviceTotalCostByRoomType",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Recupere le cout total des services pour un type de chambre donne",
+                "parameters": [
+                    {
+                        "name": "roomType",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_service": {
+                                    "type": "integer"
+                                },
+                                "service_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/cheapestservice": {
+            "get": {
+                "operationId": "cheapestService",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Recupere le service le moins cher",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_service": {
+                                        "type": "integer"
+                                    },
+                                    "service_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not found"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+        },
+        "_comment": "INCLURE",
+        "/inclure/servicesByReservation/{id_reservation}": {
+            "get": {
+                "operationId": "serviceByIdReservation",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere les services d'une reservation par son id",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_service": {
+                                    "type": "integer"
+                                },
+                                "service_name": {
+                                    "type": "string"
+                                },
+                                "service_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclure/totalPriceServicesByReservation/{id_reservation}": {
+            "get": {
+                "operationId": "totalPriceServiceByIdReservation",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere le cout total des services d'une reservation par son id",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "total": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclure/totalServicesByReservation/{id_reservation}": {
+            "get": {
+                "operationId": "countServicesByIdReservation",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere le nombre de services d'une reservation par son id",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "total": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclure/servicesByRoomType/{roomType}": {
+            "get": {
+                "operationId": "serviceByRoomType",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere les services par type de chambre",
+                "parameters": [
+                    {
+                        "name": "roomType",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_client": {
+                                    "type": "integer"
+                                },
+                                "id_room": {
+                                    "type": "integer"
+                                },
+                                "checkin_date": {
+                                    "type": "string"
+                                },
+                                "checkout_date": {
+                                    "type": "string"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "reservation_status": {
+                                    "type": "string"
+                                },
+                                "id_service_usage": {
+                                    "type": "integer"
+                                },
+                                "quantity": {
+                                    "type": "integer"
+                                },
+                                "id_service": {
+                                    "type": "integer"
+                                },
+                                "service_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "room_number": {
+                                    "type": "integer"
+                                },
+                                "capacity": {
+                                    "type": "integer"
+                                },
+                                "price_per_night": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "status": {
+                                    "type": "boolean"
+                                },
+                                "room_type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclure/countServiceByServiceName/{service_name}": {
+            "get": {
+                "operationId": "countServiceByServiceName",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere le nombre de services par nom de service",
+                "parameters": [
+                    {
+                        "name": "service_name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "total": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+
+        "/inclure/servicesByReservationTotalPriceAbove/{amount}": {
+            "get": {
+                "operationId": "serviceByReservationTotalPriceAbove",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere les services par cout total de reservation superieur a un montant donne",
+                "parameters": [
+                    {
+                        "name": "amount",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "total": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
-
-
-
 
 
     }

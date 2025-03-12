@@ -23,9 +23,9 @@ router.get('/servicesByRoomType/:roomType', (req, res) => {
     InclureController.servicesByRoomType(req, res);
 });
 
-// GET /inclure/countServicesByReservation/:id_reservation
-router.get('/countServicesByReservation/:id_reservation', (req, res) => {
-    InclureController.countServicesByReservation(req, res);
+// GET inclure/countServiceByServiceName/:service_name
+router.get('/countServiceByServiceName/:service_name', (req, res) => {
+    InclureController.countServiceByServiceName(req, res);
 });
 
 // GET /inclure/servicesByReservationTotalPriceAbove/:amount  PAS SURE DE CELLE CI

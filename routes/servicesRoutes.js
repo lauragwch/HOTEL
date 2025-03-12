@@ -8,11 +8,6 @@ router.get('/', (req, res) => {
     ServicesController.allServices(req, res);
 });
 
-// GET /services/:id
-router.get('/:id', (req, res) => {
-    ServicesController.serviceById(req, res);
-});
-
 // GET /services/above/:amount
 router.get('/above/:amount', (req, res) => {
     ServicesController.servicesAbove(req, res);
@@ -32,6 +27,11 @@ router.get('/totalCostServices/:roomType', (req, res) => {
 // GET /services/cheapestservice
 router.get('/cheapestservice', (req, res) => {
     ServicesController.cheapestService(req, res);
+});
+
+// GET /services/:id
+router.get('/:id', (req, res) => {
+    ServicesController.serviceById(req, res);
 });
 
 

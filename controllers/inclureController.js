@@ -48,11 +48,11 @@ async function servicesByRoomType(req, res) {
     }
 }
 
-async function countServicesByReservation(req, res) {
+async function countServiceByServiceName(req, res) {
     try {
-        const countServicesByReservation = await inclureService.countServicesByReservation(req.params.id_reservation);
+        const countServiceByServiceName = await inclureService.countServiceByServiceName(req.params.service_name);
         res.status(200);
-        res.json(countServicesByReservation);
+        res.json(countServiceByServiceName);
     } catch (error) {
         console.error(error);
         res.status(500);
@@ -86,6 +86,6 @@ module.exports = {
     totalPriceServicesByReservation,
     totalServicesByReservation,
     servicesByRoomType,
-    countServicesByReservation,
+    countServiceByServiceName,
     servicesByReservationTotalPriceAbove
 }

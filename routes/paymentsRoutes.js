@@ -40,7 +40,7 @@ router.get('/totalByReservationStatus/:status', (req, res) => {
 
 // GET /payments/countByMethod/:method
 router.get('/countByMethod/:method', (req, res) => {
-    PaymentsController.totalByMethod(req, res);
+    PaymentsController.countByMethod(req, res);
 });
 
 

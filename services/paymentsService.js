@@ -44,7 +44,7 @@ function totalByReservationStatus(status){
 }
 
 function countByMethod(method){
-    return connection.promise().query('SELECT COUNT(*) FROM payments WHERE payment_method = ?', [method]).then((results) => {
+    return connection.promise().query('SELECT COUNT(*) AS "Nombre de reservations" FROM payments WHERE payment_method = ?', [method]).then((results) => {
         return results[0];
     });
 }
