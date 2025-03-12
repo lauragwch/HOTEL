@@ -75,6 +75,43 @@ async function cheapestService(req, res) {
     }
 }
 
+async function addService(req, res) {
+    try {
+        const service = req.body;
+        const newService = await servicesService.addService(service);
+        res.status(201);
+        res.json(newService);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de l'ajout du service" });
+    }
+}
+
+async function updateService(req, res) {
+    try {
+        const service = req.body;
+        const updatedService = await servicesService.updateService(req.params.id, service);
+        res.status(201);
+        res.json(updatedService);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la modification du service" });
+    }
+}
+
+async function deleteService(req, res) {
+    try {
+        const deletedService = await servicesService.deleteService(req.params.id);
+        res.status(204);
+        res.json(deletedService);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la suppression du service" });
+    }
+}
 
 
 
@@ -93,5 +130,8 @@ module.exports = {
     servicesAbove,
     mostPopular,
     totalCostServices,
-    cheapestService
+    cheapestService,
+    addService,
+    updateService,
+    deleteService
 };

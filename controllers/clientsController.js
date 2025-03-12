@@ -96,6 +96,41 @@ async function maxAmountSpent(req, res) {
     }
 }
 
+async function addClient(req, res) {
+    try {
+        const newClient = await clientsService.addClient(req.body);
+        res.status(201);
+        res.json(newClient);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de l'ajout du client" });
+    }
+}
+async function updateClient(req, res) {
+    try {
+        const updatedClient = await clientsService.updateClient(req.params.id, req.body);
+        res.status(200);
+        res.json(updatedClient);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la modification du client" });
+    }
+}
+
+async function deleteClient(req, res) {
+    try {
+        const deletedClient = await clientsService.deleteClient(req.params.id);
+        res.status(204);
+        res.json(deletedClient);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la suppression du client" });
+    }
+}
+
 
 
 
@@ -118,4 +153,7 @@ module.exports = {
     clientsByCheckInDate,
     clientsByRoomType,
     maxAmountSpent,
+    addClient,
+    updateClient,
+    deleteClient
 };

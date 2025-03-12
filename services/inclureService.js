@@ -1,5 +1,17 @@
 const connection = require('../config/bdd');
 
+function AllInclure() {
+    return connection.promise().query('SELECT * FROM service_usage').then((results) => {
+        return results[0];
+    });
+}
+
+function OneInclure(id) {
+    return connection.promise().query('SELECT * FROM service_usage WHERE id_service_usage = ?', [id]).then((results) => {
+        return results[0];
+    });
+}
+
 function servicesByReservation(id_reservation) {
     return connection.promise().query('SELECT service_name FROM services INNER JOIN service_usage ON service_usage.id_service = services.id_service INNER JOIN reservations ON reservations.id_reservation = service_usage.id_reservation WHERE reservations.id_reservation = ?', [id_reservation]).then((results) => {
         return results[0];
@@ -42,6 +54,8 @@ function servicesByReservationTotalPriceAbove(amount) {
 
 
 module.exports = {
+    AllInclure,
+    OneInclure,
     servicesByReservation,
     totalPriceServicesByReservation,
     totalServicesByReservation,

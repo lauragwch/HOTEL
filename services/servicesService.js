@@ -36,6 +36,24 @@ function cheapestService() {
     });
 }
 
+function addService(service) {
+    return connection.promise().query('INSERT INTO services SET ?', [service]).then(async (results) => {
+        return await serviceById(results[0].insertId);
+    });
+}
+
+function updateService(id, service) {
+    return connection.promise().query('UPDATE services SET ? WHERE id_service = ?', [service, id]).then(async (results) => {
+        return await serviceById(id);
+    });
+}
+
+function deleteService(id) {
+    return connection.promise().query('DELETE FROM services WHERE id_service = ?', [id]).then((results) => {
+        return results[0].affectedRows;
+    });
+}
+
 
 
 
@@ -57,5 +75,8 @@ module.exports = {
     servicesAbove,
     mostPopular,
     totalCostServices,
-    cheapestService
+    cheapestService,
+    addService,
+    updateService,
+    deleteService
 };

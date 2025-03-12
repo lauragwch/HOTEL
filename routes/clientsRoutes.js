@@ -38,40 +38,24 @@ router.get('/maxAmountSpent', (req, res) => {
     ClientsController.maxAmountSpent(req, res);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // GET /clients/:id
 router.get('/:id', (req, res) => {
     ClientsController.oneClient(req, res);
+});
+
+// POST /clients/
+router.post('/', (req, res) => {
+    ClientsController.addClient(req, res);
+});
+
+// PATCH /clients/:id
+router.patch('/:id', (req, res) => {
+    ClientsController.updateClient(req, res);
+});
+
+// DELETE /clients/:id
+router.delete('/:id', (req, res) => {
+    ClientsController.deleteClient(req, res);
 });
 
 

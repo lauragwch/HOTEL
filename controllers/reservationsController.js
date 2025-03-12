@@ -84,25 +84,55 @@ async function maxReservations(req, res) {
     }
 }
 
+async function reservationsById(req, res) {
+    try {
+        const reservationsById = await reservationsService.reservationsById(req.params.id);
+        res.status(200);
+        res.json(reservationsById);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la récupération des réservations" });
+    }
+}
 
+async function addReservation(req, res) {
+    try {
+        const reservation = req.body;
+        const newReservation = await reservationsService.addReservation(reservation);
+        res.status(201);
+        res.json(newReservation);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de l'ajout de la réservation" });
+    }
+}
 
+async function updateReservation(req, res) {
+    try {
+        const reservation = req.body;
+        const updatedReservation = await reservationsService.updateReservation(req.params.id, reservation);
+        res.status(201);
+        res.json(updatedReservation);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la modification de la réservation" });
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+async function deleteReservation(req, res) {
+    try {
+        const deletedReservation = await reservationsService.deleteReservation(req.params.id);
+        res.status(204);
+        res.json(deletedReservation);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la suppression de la réservation" });
+    }
+}
 
 
 
@@ -121,4 +151,9 @@ module.exports = {
     reservationsByRoomType,
     reservationsByRoomNumber,
     maxReservations,
+    reservationsById,
+    addReservation,
+    updateReservation,
+    deleteReservation
+
 };

@@ -128,6 +128,45 @@ async function PricesBetween(req, res) {
     }
 }
 
+async function AddRoom(req, res) {
+    try {
+        const AddRoom = await RoomsService.AddRoom(req.body);
+        res.status(201);
+        res.json(AddRoom);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de l'ajout de la chambre" });
+    }
+}
+
+async function UpdateRoom(req, res) {
+    try {
+        const UpdateRoom = await RoomsService.UpdateRoom(req.params.id, req.body);
+        res.status(201);
+        res.json(UpdateRoom);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la modification de la chambre" });
+    }
+}
+
+async function DeleteRoom(req, res) {
+    try {
+        const DeleteRoom = await RoomsService.DeleteRoom(req.params.id);
+        res.status(204);
+        res.json(DeleteRoom);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la suppression de la chambre" });
+    }
+}
+
 
 
 
@@ -165,4 +204,7 @@ module.exports = {
     AvailableRoomsByType,
     PricesBelow,
     PricesBetween,
+    AddRoom,
+    UpdateRoom,
+    DeleteRoom
 }

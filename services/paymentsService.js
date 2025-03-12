@@ -49,6 +49,24 @@ function countByMethod(method){
     });
 }
 
+function addPayment(payment){
+    return connection.promise().query('INSERT INTO payments SET ?', payment).then(async (results) => {
+        return await paymentById(results[0].insertId);
+    });
+}
+
+function updatePayment(id, payment){
+    return connection.promise().query('UPDATE payments SET ? WHERE id_payment = ?', [payment, id]).then(async (results) => {
+        return await paymentById(id);
+    });
+}
+
+function deletePayment(id){
+    return connection.promise().query('DELETE FROM payments WHERE id_payment = ?', [id]).then((results) => {
+        return results[0].affectedRows;
+    });
+}
+
 
 
 
@@ -66,5 +84,8 @@ module.exports = {
     paymentsAbove,
     paymentsByReservationStatus,
     totalByReservationStatus,
-    countByMethod
+    countByMethod,
+    addPayment,
+    updatePayment,
+    deletePayment
 };

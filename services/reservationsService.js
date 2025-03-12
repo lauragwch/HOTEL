@@ -42,6 +42,30 @@ function maxReservations(){
     });
 }
 
+function reservationsById(id){
+    return connection.promise().query('SELECT * FROM reservations WHERE id_reservation = ?', [id]).then((results) => {
+        return results[0];
+    });
+}
+
+function addReservation(reservation){
+    return connection.promise().query('INSERT INTO reservations SET ?', [reservation]).then(async (results) => {
+        return await reservationsById(results[0].insertId);
+    });
+}
+
+function updateReservation(id, reservation){
+    return connection.promise().query('UPDATE reservations SET ? WHERE id_reservation = ?', [reservation, id]).then(async () => {
+        return await reservationsById(id);
+    });
+}
+
+function deleteReservation(id){
+    return connection.promise().query('DELETE FROM reservations WHERE id_reservation = ?', [id]).then((results) => {
+        return results[0].affectedRows;
+    });
+}
+
 
 
 
@@ -62,4 +86,8 @@ module.exports = {
     reservationsByRoomType,
     reservationsByRoomNumber,
     maxReservations,
+    reservationsById,
+    addReservation,
+    updateReservation,
+    deleteReservation
 };

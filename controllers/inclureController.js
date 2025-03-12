@@ -1,5 +1,41 @@
 const inclureService = require('../services/inclureService');
 
+async function AllInclure(req, res) {
+    try {
+        const allInclure = await inclureService.AllInclure();
+        res.status(200);
+        res.json(allInclure);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la récupération des services" });
+    }
+}
+
+async function inclureById(req, res) {
+    try {
+        const inclureById = await inclureService.OneInclure(req.params.id);
+        res.status(200);
+        res.json(inclureById);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la récupération du service" });
+    }
+}
+
+async function allInclure(req, res) {
+    try {
+        const allInclure = await inclureService.allInclure();
+        res.status(200);
+        res.json(allInclure);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de la récupération des services" });
+    }
+}
+
 async function servicesByReservation(req, res) {
     try {
         const servicesByReservation = await inclureService.servicesByReservation(req.params.id_reservation);
@@ -82,6 +118,8 @@ async function servicesByReservationTotalPriceAbove(req, res) {
 
 
 module.exports = {
+    AllInclure,
+    inclureById,
     servicesByReservation,
     totalPriceServicesByReservation,
     totalServicesByReservation,

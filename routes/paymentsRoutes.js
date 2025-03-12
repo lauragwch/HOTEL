@@ -43,6 +43,21 @@ router.get('/countByMethod/:method', (req, res) => {
     PaymentsController.countByMethod(req, res);
 });
 
+// POST /payments/
+router.post('/', (req, res) => {
+    PaymentsController.addPayment(req, res);
+});
+
+// PATCH /payments/:id
+router.patch('/:id', (req, res) => {
+    PaymentsController.updatePayment(req, res);
+});
+
+// DELETE /payments/:id
+router.delete('/:id', (req, res) => {
+    PaymentsController.deletePayment(req, res);
+});
+
 
 
 

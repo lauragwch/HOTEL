@@ -52,22 +52,24 @@ router.get('/prices/:min/:max', (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // GET /rooms/:id
 router.get('/:id', (req, res) => {
     RoomsController.OneRoom(req, res);
+});
+
+// POST /rooms/
+router.post('/', (req, res) => {
+    RoomsController.AddRoom(req, res);
+});
+
+// PATCH /rooms/:id
+router.patch('/:id', (req, res) => {
+    RoomsController.UpdateRoom(req, res);
+});
+
+// DELETE /rooms/:id
+router.delete('/:id', (req, res) => {
+    RoomsController.DeleteRoom(req, res);
 });
 
 

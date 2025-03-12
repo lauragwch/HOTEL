@@ -34,6 +34,21 @@ router.get('/:id', (req, res) => {
     ServicesController.serviceById(req, res);
 });
 
+// POST /services/
+router.post('/', (req, res) => {
+    ServicesController.addService(req, res);
+});
+
+// PATCH /services/:id
+router.patch('/:id', (req, res) => {
+    ServicesController.updateService(req, res);
+});
+
+// DELETE /services/:id
+router.delete('/:id', (req, res) => {
+    ServicesController.deleteService(req, res);
+});
+
 
 
 

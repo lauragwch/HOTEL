@@ -58,6 +58,52 @@
                         "description": "Internal server error"
                     }
                 }
+            },
+            "post": {
+                "operationId": "addRoom",
+                "tags": [
+                    "Rooms"
+                ],
+                "description": "Ajoute une chambre",
+                "parameters": [
+                    {
+                        "name": "room",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "room_number": {
+                                    "type": "integer"
+                                },
+                                "capacity": {
+                                    "type": "integer"
+                                },
+                                "price_per_night": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "status": {
+                                    "type": "boolean"
+                                },
+                                "room_type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         },
         "/rooms/{id}": {
@@ -102,6 +148,87 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "updateRoom",
+                "tags": [
+                    "Rooms"
+                ],
+                "description": "Met a jour une chambre",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "room",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "room_number": {
+                                    "type": "integer"
+                                },
+                                "capacity": {
+                                    "type": "integer"
+                                },
+                                "price_per_night": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "status": {
+                                    "type": "boolean"
+                                },
+                                "room_type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteRoom",
+                "tags": [
+                    "Rooms"
+                ],
+                "description": "Supprime une chambre",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
                     "404": {
                         "description": "Not found"
@@ -576,6 +703,185 @@
                         "description": "Internal server error"
                     }
                 }
+            },
+            "post": {
+                "operationId": "addClient",
+                "tags": [
+                    "Clients"
+                ],
+                "description": "Ajoute un client",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "first_name": {
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "registration_date": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/clients/{id}": {
+            "get": {
+                "operationId": "clientsById",
+                "tags": [
+                    "Clients"
+                ],
+                "description": "Recupere la liste des clients par leur id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_client": {
+                                        "type": "integer"
+                                    },
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "registration_date": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "updateClient",
+                "tags": [
+                    "Clients"
+                ],
+                "description": "Met a jour un client",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "client",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "first_name": {
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "registration_date": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteClient",
+                "tags": [
+                    "Clients"
+                ],
+                "description": "Supprime un client",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         },
         "/clients/year/{year}": {
@@ -1039,6 +1345,197 @@
                 "500": {
                     "description": "Internal server error"
                 }
+            },
+            "post": {
+                "operationId": "addReservation",
+                "tags": [
+                    "Reservations"
+                ],
+                "description": "Ajoute une reservation",
+                "parameters": [
+                    {
+                        "name": "reservation",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_client": {
+                                    "type": "integer"
+                                },
+                                "id_room": {
+                                    "type": "integer"
+                                },
+                                "checkin_date": {
+                                    "type": "string"
+                                },
+                                "checkout_date": {
+                                    "type": "string"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "reservation_status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/reservations/{id_reservation}": {
+            "get": {
+                "operationId": "ReservationsById",
+                "tags": [
+                    "Reservations"
+                ],
+                "description": "Recupere la liste des reservations par id de reservation",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_reservation": {
+                                        "type": "integer"
+                                    },
+                                    "id_client": {
+                                        "type": "integer"
+                                    },
+                                    "id_room": {
+                                        "type": "integer"
+                                    },
+                                    "checkin_date": {
+                                        "type": "string"
+                                    },
+                                    "checkout_date": {
+                                        "type": "string"
+                                    },
+                                    "total_price": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "reservation_status": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not found"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            },
+            "patch": {
+                "operationId": "updateReservation",
+                "tags": [
+                    "Reservations"
+                ],
+                "description": "Met a jour une reservation",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "reservation",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_client": {
+                                    "type": "integer"
+                                },
+                                "id_room": {
+                                    "type": "integer"
+                                },
+                                "checkin_date": {
+                                    "type": "string"
+                                },
+                                "checkout_date": {
+                                    "type": "string"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "reservation_status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteReservation",
+                "tags": [
+                    "Reservations"
+                ],
+                "description": "Supprime une reservation",
+                "parameters": [
+                    {
+                        "name": "id_reservation",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         },
         "/reservations/status/{reservation_status}": {
@@ -1448,6 +1945,46 @@
                 "500": {
                     "description": "Internal server error"
                 }
+            },
+            "post": {
+                "operationId": "addPayment",
+                "tags": [
+                    "Payments"
+                ],
+                "description": "Ajoute un paiement",
+                "parameters": [
+                    {
+                        "name": "payment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "payment_date": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "payment_method": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         },
         "/payments/{id}": {
@@ -1486,6 +2023,81 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "updatePayment",
+                "tags": [
+                    "Payments"
+                ],
+                "description": "Met a jour un paiement",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "payment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "payment_date": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "payment_method": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deletePayment",
+                "tags": [
+                    "Payments"
+                ],
+                "description": "Supprime un paiement",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
                     "404": {
                         "description": "Not found"
@@ -1876,6 +2488,46 @@
                 "500": {
                     "description": "Internal server error"
                 }
+            },
+            "post": {
+                "operationId": "addService",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Ajoute un service",
+                "parameters": [
+                    {
+                        "name": "service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "service_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         },
         "/services/{id}": {
@@ -1914,6 +2566,81 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "updateService",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Met a jour un service",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "service_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteService",
+                "tags": [
+                    "Services"
+                ],
+                "description": "Supprime un service",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
                     "404": {
                         "description": "Not found"
@@ -2101,6 +2828,237 @@
             }
         },
         "_comment": "INCLURE",
+        "/inclure": {
+            "get": {
+                "operationId": "allInclure",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere la liste de tous les inclures",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id_reservation": {
+                                        "type": "integer"
+                                    },
+                                    "id_service": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not found"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            },
+            "post": {
+                "operationId": "addInclure",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Ajoute un inclure",
+                "parameters": [
+                    {
+                        "name": "inclure",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_service": {
+                                    "type": "integer"
+                                },
+                                "quantity": {
+                                    "type": "integer"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_service": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/inclure/{id}": {
+            "get": {
+                "operationId": "inclure_id",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Recupere un inclure par son id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_service": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "404": {
+                    "description": "Not found"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            },
+            "patch": {
+                "operationId": "updateInclure",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Met a jour un inclure",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "inclure",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_service": {
+                                    "type": "integer"
+                                },
+                                "quantity": {
+                                    "type": "integer"
+                                },
+                                "total_price": {
+                                    "type": "number",
+                                    "format": "float"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_service": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteInclure",
+                "tags": [
+                    "Inclure"
+                ],
+                "description": "Supprime un inclure",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_reservation": {
+                                    "type": "integer"
+                                },
+                                "id_service": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/inclure/servicesByReservation/{id_reservation}": {
             "get": {
                 "operationId": "serviceByIdReservation",
@@ -2345,7 +3303,6 @@
                 }
             }
         },
-
         "/inclure/servicesByReservationTotalPriceAbove/{amount}": {
             "get": {
                 "operationId": "serviceByReservationTotalPriceAbove",
@@ -2383,7 +3340,5 @@
                 }
             }
         }
-
-
     }
 }

@@ -60,6 +60,24 @@ function PricesBetween(min, max){
     });
 }
 
+function AddRoom(room){
+    return connection.promise().query('INSERT INTO room SET ?', [room]).then(async (results) => {
+        return await OneRoom(results[0].insertId);
+    });
+}
+
+function UpdateRoom(id, room){
+    return connection.promise().query('UPDATE room SET ? WHERE id_room = ?', [room, id]).then(async (results) => {
+        return await OneRoom(id);
+    });
+}
+
+function DeleteRoom(id){
+    return connection.promise().query('DELETE FROM room WHERE id_room = ?', [id]).then((results) => {
+        return results[0].affectedRows;
+    });
+}
+
 
 
 
@@ -94,4 +112,7 @@ module.exports = {
     AvailableRoomsByType,
     PricesBelow,
     PricesBetween,
+    AddRoom,
+    UpdateRoom,
+    DeleteRoom
 }   

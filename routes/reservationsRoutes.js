@@ -37,31 +37,25 @@ router.get('/maxReservations', (req, res) => {
     ReservationsController.maxReservations(req, res);
 });
 
+// GET /reservations/:id
+router.get('/:id', (req, res) => {
+    ReservationsController.reservationsById(req, res);
+});
 
+// POST /reservations/
+router.post('/', (req, res) => {
+    ReservationsController.addReservation(req, res);
+});
 
+// PATCH /reservations/:id
+router.patch('/:id', (req, res) => {
+    ReservationsController.updateReservation(req, res);
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// DELETE /reservations/:id
+router.delete('/:id', (req, res) => {
+    ReservationsController.deleteReservation(req, res);
+});
 
 
 
