@@ -49,7 +49,7 @@ function reservationsById(id){
 }
 
 function addReservation(reservation){
-    return connection.promise().query('INSERT INTO reservations SET ?', [reservation]).then(async (results) => {
+    return connection.promise().query('INSERT INTO reservations SET id_client = ?, id_room = ?, checkin_date = ?, checkout_date = ?, total_price = ?, reservation_status = "en attente"', [reservation.user.id, reservation.body.id_room, reservation.body.checkin_date, reservation.body.checkout_date, reservation.body.total_price]).then(async (results) => {
         return await reservationsById(results[0].insertId);
     });
 }

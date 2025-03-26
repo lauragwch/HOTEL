@@ -48,6 +48,12 @@ function servicesByReservationTotalPriceAbove(amount) {
     });
 }
 
+function addInclure(data) {
+    return connection.promise().query('INSERT INTO service_usage SET ?', [data]).then((results) => {
+        return results[0];
+    });
+}
+
 
 
 
@@ -61,5 +67,6 @@ module.exports = {
     totalServicesByReservation,
     servicesByRoomType,
     countServiceByServiceName,
-    servicesByReservationTotalPriceAbove
+    servicesByReservationTotalPriceAbove,
+    addInclure
 }

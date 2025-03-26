@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ServicesController = require('../controllers/servicesController');
+const AuthController = require('../controllers/authController');
 
 
 // GET /services/
@@ -35,17 +36,17 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /services/
-router.post('/', (req, res) => {
+router.post('/',AuthController.verifyToken, (req, res) => {
     ServicesController.addService(req, res);
 });
 
 // PATCH /services/:id
-router.patch('/:id', (req, res) => {
+router.patch('/:id',AuthController.verifyToken, (req, res) => {
     ServicesController.updateService(req, res);
 });
 
 // DELETE /services/:id
-router.delete('/:id', (req, res) => {
+router.delete('/:id',AuthController.verifyToken, (req, res) => {
     ServicesController.deleteService(req, res);
 });
 

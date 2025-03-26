@@ -108,6 +108,18 @@ async function servicesByReservationTotalPriceAbove(req, res) {
     }
 }
 
+async function addInclure(req, res) {
+    try {
+        const addInclure = await inclureService.addInclure(req.body);
+        res.status(200);
+        res.json(addInclure);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ "message": "Une erreur est survenue lors de l'ajout du service" });
+    }
+}   
+
 
 
 
@@ -125,5 +137,6 @@ module.exports = {
     totalServicesByReservation,
     servicesByRoomType,
     countServiceByServiceName,
-    servicesByReservationTotalPriceAbove
+    servicesByReservationTotalPriceAbove,
+    addInclure,
 }

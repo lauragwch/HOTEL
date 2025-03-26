@@ -99,7 +99,7 @@ async function reservationsById(req, res) {
 async function addReservation(req, res) {
     try {
         const reservation = req.body;
-        const newReservation = await reservationsService.addReservation(reservation);
+        const newReservation = await reservationsService.addReservation(req);
         res.status(201);
         res.json(newReservation);
     } catch (error) {

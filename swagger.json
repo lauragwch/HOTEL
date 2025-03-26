@@ -10,7 +10,77 @@
     ],
     "host": "localhost:3000",
     "basePath": "/",
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Entrer le token JWT sous la forme 'Bearer token'"
+        }
+    },
+
+    "security": [
+        {
+            "Bearer": []
+        }
+    ],
     "paths": {
+        "_comment": "AUTH",
+        "/auth/login": {
+            "post": {
+                "operationId": "auth_login",
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Connecte un utilisateur",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "token": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+
+
+
+
+
+
         "_comment": "ROOMS",
         "/rooms": {
             "get": {
@@ -732,7 +802,11 @@
                                 },
                                 "registration_date": {
                                     "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
                                 }
+                                
                             }
                         }
                     }
@@ -874,6 +948,50 @@
                 "responses": {
                     "200": {
                         "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/clients/me": {
+            "get": {
+                "operationId": "clients_me",
+                "tags": [
+                    "Clients"
+                ],
+                "description": "Recupere les informations du client connecte",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id_client": {
+                                    "type": "integer"
+                                },
+                                "first_name": {
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "registration_date": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Not found"

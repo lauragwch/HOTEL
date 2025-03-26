@@ -1,11 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const ClientsController = require('../controllers/clientsController');
+const AuthController = require('../controllers/authController');
 
 
 // GET /clients/
 router.get('/', (req, res) => {
     ClientsController.allClients(req, res);
+});
+
+// GET /me
+router.get('/me', AuthController.verifyToken, (req, res) => {
+    ClientsController.findMe(req, res);
 });
 
 // GET /clients/year/:year
@@ -49,13 +55,23 @@ router.post('/', (req, res) => {
 });
 
 // PATCH /clients/:id
-router.patch('/:id', (req, res) => {
+router.patch('/:id',AuthController.verifyToken, (req, res) => {
     ClientsController.updateClient(req, res);
 });
 
 // DELETE /clients/:id
-router.delete('/:id', (req, res) => {
+router.delete('/:id',AuthController.verifyToken, (req, res) => {
     ClientsController.deleteClient(req, res);
+});
+
+//POST /clients/password_forget
+router.post('/password_forget', (req, res) => {
+    ClientsController.passwordForget(req, res);
+});
+
+//POST /clients/password_reset 
+router.post('/password_reset/:token', AuthController.verifyToken, (req, res) => {
+    ClientsController.passwordReset(req, res);
 });
 
 

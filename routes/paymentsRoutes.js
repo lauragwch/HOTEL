@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const PaymentsController = require('../controllers/paymentsController');
+const AuthController = require('../controllers/authController');
 
 
 // GET /payments/
@@ -44,17 +45,17 @@ router.get('/countByMethod/:method', (req, res) => {
 });
 
 // POST /payments/
-router.post('/', (req, res) => {
+router.post('/',AuthController.verifyToken, (req, res) => {
     PaymentsController.addPayment(req, res);
 });
 
 // PATCH /payments/:id
-router.patch('/:id', (req, res) => {
+router.patch('/:id',AuthController.verifyToken, (req, res) => {
     PaymentsController.updatePayment(req, res);
 });
 
 // DELETE /payments/:id
-router.delete('/:id', (req, res) => {
+router.delete('/:id',AuthController.verifyToken, (req, res) => {
     PaymentsController.deletePayment(req, res);
 });
 

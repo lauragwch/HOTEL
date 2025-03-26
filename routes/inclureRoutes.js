@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const InclureController = require('../controllers/inclureController');
+const AuthController = require('../controllers/authController');
 
 // GET /inclure/
 router.get('/', (req, res) => {
@@ -40,6 +41,21 @@ router.get('/countServiceByServiceName/:service_name', (req, res) => {
 // GET /inclure/servicesByReservationTotalPriceAbove/:amount
 router.get('/servicesByReservationTotalPriceAbove/:amount', (req, res) => {
     InclureController.servicesByReservationTotalPriceAbove(req, res);
+});
+
+// POST /inclure/
+router.post('/',AuthController.verifyToken, (req, res) => {
+    InclureController.addInclure(req, res);
+});
+
+// PATCH /inclure/:id
+router.patch('/:id',AuthController.verifyToken,(req, res) => {
+    InclureController.updateInclure(req, res);
+});
+
+// DELETE /inclure/:id
+router.delete('/:id',AuthController.verifyToken, (req, res) => {
+    InclureController.deleteInclure(req, res);
 });
 
 

@@ -66,6 +66,12 @@ function deleteClient(id){
     });
 }
 
+function findClientByEmail(email){
+    return connection.promise().query('SELECT * FROM clients WHERE email = ?', [email]).then((results) => {
+        return results[0][0];
+    });
+}
+
 
 
 
@@ -83,5 +89,6 @@ module.exports = {
     maxAmountSpent,
     addClient,
     updateClient,
-    deleteClient
+    deleteClient,
+    findClientByEmail
 };
