@@ -115,7 +115,6 @@ async function addClient(req, res) {
 }
 async function updateClient(req, res) {
     try {
-        console.log(req.user);
         const updatedClient = await clientsService.updateClient(req.params.id, req.body);
         res.status(200);
         res.json(updatedClient);
@@ -157,7 +156,10 @@ async function findMe(req, res) {
 
     async function passwordForget(req, res) {
         try {
+            console.log(req.body.email.email);
             const client = await clientsService.findClientByEmail(req.body.email);
+
+            console.log(client);
             if (!client) {
                 return res.status(404).json({ message: 'Aucun utilisateur trouvé avec cet email' });
             }

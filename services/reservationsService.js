@@ -1,7 +1,7 @@
 const connection = require('../config/bdd');
 
 function allReservations(){
-    return connection.promise().query('SELECT * FROM reservations').then((results) => {
+    return connection.promise().query('select R.id_reservation, R.checkin_date, R.checkout_date, R.total_price, R.reservation_status, R.id_room, C.first_name, C.last_name from reservations AS R inner join clients as C on R.id_client = C.id_client;').then((results) => {
         return results[0];
     });
 }

@@ -34,6 +34,15 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 // Lance le serveur express sur le port 3000
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+// });
+
+module.exports = app;
+
+if (require.main === module) {
+    // Demarrez le serveur seulement dans ce cas
+    app.listen(port, () => {
+        console.log(`Server is running on ${port}`);
+    });
+}

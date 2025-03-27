@@ -13,13 +13,13 @@ function oneClient(id){
 }
 
 function clientsByYear(year){
-    return connection.promise().query('SELECT id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE YEAR(checkin_date) = ?', [year]).then((results) => {
+    return connection.promise().query('SELECT clients.id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE YEAR(checkin_date) = ?', [year]).then((results) => {
         return results[0];
     });
 }
 
 function totalCostAbove(price){
-    return connection.promise().query('SELECT id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE total_price >= ?', [price]).then((results) => {
+    return connection.promise().query('SELECT clients.id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE total_price >= ?', [price]).then((results) => {
         return results[0];
     });
 }
@@ -31,13 +31,13 @@ function clientsByRegistrationDate(month, year){
 }
 
 function clientsByCheckInDate(month, year){
-    return connection.promise().query('SELECT DISTINCT id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE MONTH(checkin_date) = ? AND YEAR(checkin_date)= ?', [month, year]).then((results) => {
+    return connection.promise().query('SELECT DISTINCT clients.id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client WHERE MONTH(checkin_date) = ? AND YEAR(checkin_date)= ?', [month, year]).then((results) => {
         return results[0];
     });
 }
 
 function clientsByRoomType(roomType){
-    return connection.promise().query('SELECT DISTINCT id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client INNER JOIN room ON room.id_room = reservations.id_room WHERE room_type = ?', [roomType]).then((results) => {
+    return connection.promise().query('SELECT DISTINCT clients.id_client, first_name, last_name, email, phone, registration_date FROM clients INNER JOIN reservations ON reservations.id_client = clients.id_client INNER JOIN room ON room.id_room = reservations.id_room WHERE room_type = ?', [roomType]).then((results) => {
         return results[0];
     });
 }

@@ -19,7 +19,7 @@ function AvailableRooms(){
 }
 
 function averageCapacity(){
-    return connection.promise().query('SELECT AVG(capacity) as "Capacité moyenne" FROM room').then((results) => {
+    return connection.promise().query('SELECT AVG(capacity) as capacity_avg FROM room').then((results) => {
         return results[0][0];
     });
 }
