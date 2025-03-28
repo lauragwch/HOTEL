@@ -89,9 +89,10 @@ test('GET /rooms/prices/:min/:max doit retourner un tableau de rooms', async () 
 test('GET /rooms/:id doit retourner une room', async () => {
     // Arrange
     const statutAttendu = 200;
+    const token = await getToken();
 
     // Act
-    const response = await supertest(app).get('/rooms/1');
+    const response = await supertest(app).get('/rooms/1').set('authorization', token);
 
     // Assert
     expect(response.status).toBe(statutAttendu);
@@ -103,7 +104,9 @@ test('GET /rooms/:id doit retourner une room', async () => {
 test('POST /rooms/ doit ajouter une room', async () => {
     // Arrange
     const statutAttendu = 201;
+    const token = await getToken();
     const room = {
+        "room_number": 1,
         "room_type": "single",
         "price_per_night": 100,
         "capacity": 1,
@@ -111,7 +114,7 @@ test('POST /rooms/ doit ajouter une room', async () => {
     };
 
     // Act
-    const response = await supertest(app).post('/rooms').send(room);
+    const response = await supertest(app).post('/rooms').set('authorization', token).send(room);
 
     // Assert
     expect(response.status).toBe(statutAttendu);
@@ -122,7 +125,8 @@ test('POST /rooms/ doit ajouter une room', async () => {
 
 test ('PATCH /rooms/:id doit modifier une room', async () => {
     // Arrange
-    const statutAttendu = 200;
+    const statutAttendu = 201;
+    const token = await getToken();
     const room = {
         room_number: 1,
         capacity: 1,
@@ -132,7 +136,7 @@ test ('PATCH /rooms/:id doit modifier une room', async () => {
     };
 
     // Act
-    const response = await supertest(app).patch('/rooms/1').send(room);
+    const response = await supertest(app).patch('/rooms/1').set('authorization', token).send(room);
 
     // Assert
     expect(response.status).toBe(statutAttendu);
